@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Motivation}{2}{0}{1}
+\beamer@sectionintoc {2}{Model}{3}{0}{2}
+\beamer@sectionintoc {3}{Theory}{4}{0}{3}
+\beamer@sectionintoc {4}{Results}{6}{0}{4}
+\beamer@sectionintoc {5}{Theory: Bifurcations}{12}{0}{5}
+\beamer@sectionintoc {6}{Summary}{13}{0}{6}
