@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+
+\bibitem{guckenheimer1983nonlinear}
+John Guckenheimer and Philip Holmes.
+\newblock {\em Nonlinear Oscillations, Dynamical Systems, and Bifurcations of
+  Vector Fields}, volume~42 of {\em Applied Mathematical Sciences}.
+\newblock Springer, New York, 1983.
+
+\bibitem{sompolinsky1988chaos}
+H.~Sompolinsky, A.~Crisanti, and H.~J. Sommers.
+\newblock Chaos in random neural networks.
+\newblock {\em Physical Review Letters}, 61(3):259--262, 1988.
+
+\end{thebibliography}

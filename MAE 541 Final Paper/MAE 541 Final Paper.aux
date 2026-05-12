@@ -1,0 +1,57 @@
+\relax 
+\providecommand*\new@tpo@label[2]{}
+\providecommand \babel@aux [2]{\global \let \babel@toc \@gobbletwo }
+\@nameuse{bbl@beforestart}
+\babel@aux{english}{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Motivation}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Background}{1}{}\protected@file@percent }
+\citation{sompolinsky1988chaos}
+\citation{sompolinsky1988chaos}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Fixed-Weight Recurrent Networks}{2}{}\protected@file@percent }
+\newlabel{eq:rnn}{{3.1}{2}{}{equation.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Grossberg \(S\)-\(\Sigma \) Equivalence}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Learning in Recurrent Neural Networks}{2}{}\protected@file@percent }
+\newlabel{eq:oja}{{3.6}{3}{}{equation.3.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Girko's Circular Law}{3}{}\protected@file@percent }
+\citation{sompolinsky1988chaos}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Eigenvalues of a random weight matrix $W \in \math@bb  {R}^{50\times 50}$ with $W_{ij}\sim \mathcal  {N}(0,g^2/n)$ and $g=1.5$, distributed uniformly on the disk $D_g$ in accordance with Girko's circular law.}}{4}{}\protected@file@percent }
+\newlabel{fig:girko}{{3.1}{4}{}{figure.3.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Theoretical Analysis}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Fixed-Point Analysis of the Undriven Network}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Stability and Existence Under Periodic Drive}{5}{}\protected@file@percent }
+\newlabel{eq:variational}{{4.5}{5}{}{equation.4.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Oja Plasticity on the Slow Manifold}{5}{}\protected@file@percent }
+\newlabel{eq:slow}{{4.7}{5}{}{equation.4.7}{}}
+\newlabel{eq:wstar}{{4.9}{5}{}{equation.4.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Effective Random-Matrix Gain Under Drive}{6}{}\protected@file@percent }
+\newlabel{eq:geff}{{4.15}{6}{}{equation.4.15}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Numerical Results}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Oja Learning Does Not Self-Organize to the Edge of Chaos}{7}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Spectral radius $\rho (W(t))$ over time for all initial conditions $g_0$ under sinusoidal drive (top) and autonomous dynamics (bottom). Under drive, $\rho (W)\to 45$ regardless of $g_0$. Without drive, a clean bifurcation at $g_0 = 1$ is visible.}}{7}{}\protected@file@percent }
+\newlabel{fig:rho_traj}{{5.1}{7}{}{figure.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Edge-of-Chaos Optimality for Signal Reconstruction}{7}{}\protected@file@percent }
+\citation{sompolinsky1988chaos}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Signal reconstruction $R^2$ as a function of initial spectral radius $g_0$. The peak near $g_0 \approx 0.9$--$1.0$ reflects the richest transient activity at the edge of chaos. Mean $\pm $ one standard deviation across 5 seeds.}}{8}{}\protected@file@percent }
+\newlabel{fig:r2_vs_g}{{5.2}{8}{}{figure.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Frozen Random Reservoir Outperforms Oja-Learned Weights}{8}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Comparison of signal reconstruction $R^2$ for Oja-learned weights (solid) versus a frozen random reservoir with ridge regression (dashed). The frozen reservoir achieves $R^2 \approx 1.0$ for all $g_0$; Oja learning is consistently worse.}}{9}{}\protected@file@percent }
+\newlabel{fig:r2_comparison}{{5.3}{9}{}{figure.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Input Structure Drives Rank Collapse}{9}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Rank of the rolling activity correlation matrix $\hat  {C}$ over time for sinusoidal drive (left) and white noise drive (right), at $g = 1.0$. Sinusoidal drive collapses the rank to 1 within $T \approx 50$; white noise preserves full rank.}}{10}{}\protected@file@percent }
+\newlabel{fig:rank_collapse}{{5.4}{10}{}{figure.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Effective Gain Is Self-Regulated by Saturation}{10}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Time-averaged effective gain $g_{\mathrm  {eff}}$ (blue circles) and direct $\rho (D(t)W)$ (orange squares) versus nominal $g$ for frozen weights under sinusoidal drive. The dotted diagonal shows the no-saturation baseline $g_{\mathrm  {eff}} = g$. The heuristic tracks $\rho (DW)$ within 5\% across all $g$. The $g_{\mathrm  {eff}} = 1$ stability crossing occurs at $g \approx 1.5$, shifted right of the Girko prediction $g=1$.}}{11}{}\protected@file@percent }
+\newlabel{fig:geff_scan}{{5.5}{11}{}{figure.5.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Critical Slowing Down at the Phase Transition}{11}{}\protected@file@percent }
+\citation{guckenheimer1983nonlinear}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Left: relaxation time $\tau _{\mathrm  {relax}} = -1/\lambda _1$ versus $g$ for the autonomous discrete map. Right: perturbation divergence curves for representative $g$ values after warmup to the attractor. $\tau _{\mathrm  {relax}}$ diverges as $g \to 1^-$.}}{12}{}\protected@file@percent }
+\newlabel{fig:csd}{{5.6}{12}{}{figure.5.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Largest Lyapunov exponent and relaxation time for selected $g$ values.}}{12}{}\protected@file@percent }
+\newlabel{tab:lle}{{5.1}{12}{}{table.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion and Conclusion}{12}{}\protected@file@percent }
+\bibstyle{plain}
+\bibdata{references}
+\bibcite{guckenheimer1983nonlinear}{1}
+\bibcite{sompolinsky1988chaos}{2}
+\gdef \@abspage@last{13}

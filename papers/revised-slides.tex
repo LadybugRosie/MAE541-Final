@@ -1,0 +1,836 @@
+% Copyright (c) 2022 by Lars Spreng
+% This work is licensed under the Creative Commons Attribution 4.0 International License. 
+% To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% You can add your packages and commands to the loadslides.tex file. 
+% The files in the folder "styles" can be modified to change the layout and design of your slides.
+% I have included examples on how to use the template below. 
+% Some of these examples are taken from the Metropolis template.
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+\documentclass[
+11pt,notheorems,hyperref={pdfauthor=whatever}
+]{beamer}
+
+\input{loadslides.tex} % Loads packages and some defined commands
+
+\title[
+Dynamical Systems Final Project
+]{Oja-Type Plasticity and Neural Signal Reconstruction in Recurrent Networks}
+
+\subtitle{A Dynamical Systems Approach Using Bifurcation Analysis and Random Matrix Theory}
+
+\author[
+Hovey \& Biswas
+]{
+    David Hovey \&
+    Aditya Biswas
+}
+
+\institute{
+    Princeton University}
+\date{\today}
+
+\begin{document}
+
+% Generate title page
+{
+\setbeamertemplate{footline}{} 
+\begin{frame}
+  \titlepage
+\end{frame}
+}
+\addtocounter{framenumber}{-1}
+
+% You can declare different parts as a parentof sections
+
+\section{Introductory Remarks}
+
+\begin{frame}{Motivation: Brain Rhythms, Dimensionality, and Seizure-Like Synchrony}
+\small
+
+\begin{columns}[T]
+\begin{column}{0.57\textwidth}
+
+\textbf{Why study rhythmic neural activity?}
+\begin{itemize}
+  \item Neural circuits process time-varying signals: sensory inputs,
+        motor rhythms, and internal oscillations.
+  \item These signals can often be understood as combinations of simpler
+        oscillatory components, like a Fourier series.
+  \item Good representation requires rich, flexible activity rather than
+        every neuron doing the same thing.
+\end{itemize}
+
+\vspace{0.3em}
+
+\textbf{What changes in seizure-like states?}
+\begin{itemize}
+  \item Seizures involve abnormal synchronization across neural populations.
+  \item When many neurons fire together, the activity becomes less diverse.
+  \item In linear-algebra terms, this resembles a collapse in effective
+        dimensionality.
+\end{itemize}
+
+\end{column}
+
+\begin{column}{0.40\textwidth}
+
+\begin{block}{Central Question}
+Does Oja-type plasticity under rhythmic input preserve high-dimensional
+activity, or drive the network toward low-dimensional synchrony?
+\end{block}
+
+\vspace{0.4em}
+
+\textbf{Project idea:}
+
+We study whether a simple local learning rule can reshape the stability of
+a recurrent network and create a pathway toward synchronized dynamics.
+
+\end{column}
+\end{columns}
+
+\end{frame}
+\begin{frame}{Background: Fixed-Weight Recurrent Networks}
+\small
+
+A common starting point is a recurrent neural network whose synaptic weights
+are fixed in time:
+
+\[
+\tau \dot{x}_i
+=
+-x_i
++
+f\left(\sum_j W_{ij}x_j+b_i\right).
+\]
+
+Here \(x_i(t)\) is the activity of neuron \(i\), \(W_{ij}\) is the weight from
+neuron \(j\) to neuron \(i\), \(b_i\) is an external input or bias, and \(f\)
+is a nonlinear activation function.
+
+\vspace{0.5em}
+
+In this setting, memory and computation are usually studied through the
+evolving neural state \({\bf x}(t)\), while the matrix \(W\) defines the fixed
+recurrent architecture.
+
+\vspace{0.5em}
+
+\begin{block}{Dynamical systems viewpoint}
+For fixed \(W\), stability, oscillations, and chaos are controlled by the
+interaction between the weight spectrum and the nonlinear activity dynamics.
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Background: The Grossberg \(S\)-\(\Sigma\) Viewpoint}
+A recurrent rate model is often written in the form
+
+\[
+\tau \dot{x}_i
+=
+-x_i
++
+f\left(\sum_j W_{ij}x_j+b_i\right).
+\]
+
+In this formulation, the nonlinear activation is applied after neuron \(i\)
+integrates its total recurrent input.
+
+\vspace{0.7em}
+
+An alternative formulation, common in Grossberg-type models, is
+
+\[
+\tau \dot{x}_i
+=
+-x_i
++
+\sum_j W_{ij}S(x_j)
++
+b_i.
+\]
+
+Here \(S(x_j)\) is interpreted as the nonlinear signal emitted by the
+presynaptic neuron \(j\), which is then weighted by \(W_{ij}\) and summed by
+the postsynaptic neuron.
+
+\vspace{0.7em}
+
+\begin{block}{Formal interpretation}
+The \(S\)-\(\Sigma\) viewpoint separates the internal activity variable
+\(x_j\) from the transmitted signal \(S(x_j)\). Thus, the nonlinearity can be
+represented either as a postsynaptic activation applied to the integrated
+input, or as a presynaptic signal function applied before synaptic summation.
+\end{block}
+\end{frame}
+
+\begin{frame}{Background: Learning in Recurrent Neural Networks}
+\small
+
+In the fixed-weight setting, the state \({\bf x}(t)\) evolves through a fixed recurrent
+architecture \(W\). Introducing learning makes the weights dynamic, so the
+system evolves in the enlarged state space
+
+\[
+({\bf x}(t),W(t)).
+\]
+
+\vspace{0.5em}
+
+A standard local model of synaptic modification is Hebbian learning,
+
+\[
+\dot W_{ij}
+=
+\eta x_i x_j,
+\]
+
+which increases the weight \(W_{ij}\) when the presynaptic and postsynaptic
+activities are correlated. However, this rule alone can lead to unbounded
+growth of the weights.
+
+\vspace{0.5em}
+
+Oja's rule modifies Hebbian learning by adding an activity-dependent
+normalization term:
+
+\[
+\dot W_{ij}
+=
+\eta x_i x_j
+-
+\eta x_i^2 W_{ij}.
+\]
+
+\vspace{0.4em}
+
+Oja-type plasticity preserves the local Hebbian dependence on neural activity
+while keeping the weights bounded. As a result, the recurrent architecture
+\(W(t)\) evolves with the neural state and can change the stability and
+long-term behavior of the network.
+
+\end{frame}
+
+\begin{frame}{Background: Girko's Circular Law}
+\small
+
+Let \(W^{(n)} = (W_{ij}) \in \mathbb{R}^{n \times n}\) be a random matrix whose entries are
+independent and identically distributed (i.i.d.) real random variables satisfying
+\[
+\mathbb{E}[W_{ij}] = 0,
+\qquad
+\mathbb{E}[W_{ij}^2] = \frac{g^2}{n},
+\qquad
+\mathbb{E}[|W_{ij}|^{2+\epsilon}] < \infty.
+\]
+
+Let \(\lambda_1,\dots,\lambda_n \in \mathbb{C}\) denote the eigenvalues of \(W^{(n)}\), and define the empirical spectral measure
+\[
+\mu_n
+=
+\frac{1}{n}\sum_{k=1}^n \delta_{\lambda_k}.
+\]
+
+Then Girko's circular law states that, as \(n \to \infty\),
+\[
+\mu_n \;\Rightarrow\; \mu_{\mathrm{circ}},
+\]
+where \(\Rightarrow\) denotes weak convergence of probability measures and
+\[
+d\mu_{\mathrm{circ}}(z)
+=
+\frac{1}{\pi g^2}\mathbf{1}_{\{|z|\le g\}}\, d^2 z
+\]
+is the uniform probability measure on the disk of radius \(g\) in \(\mathbb{C}\).
+
+\vspace{0.5em}
+
+\begin{block}{Interpretation for recurrent networks}
+For large random recurrent networks, the spectrum of the weight matrix becomes asymptotically uniform over a disk in the complex plane. The parameter \(g\) controls the spectral radius and therefore the effective strength of recurrent feedback, determining whether the system is stable, oscillatory, or unstable.
+\end{block}
+\end{frame}
+
+\begin{frame}{Fixed-Point Analysis}
+    For Adi To-do
+\end{frame}
+
+\begin{frame}{Special Case: Internally Driven Fixed-Weight Dynamics}
+\small
+
+First consider the case with no external drive and zero bias:
+
+\[
+\tau \dot{x}
+=
+-x+\tanh(Wx).
+\]
+
+All activity is generated internally by the recurrent network. Since
+\(\tanh(0)=0\), the origin is an equilibrium:
+
+\[
+x^\ast=0.
+\]
+
+Linearizing at \(x=0\), using \(\tanh'(0)=1\), gives
+
+\[
+J(0)=\frac{1}{\tau}(-I+W).
+\]
+
+If \(W_{ij}\) are random with
+
+\[
+\mathbb{E}[W_{ij}]=0,
+\qquad
+\mathrm{Var}(W_{ij})=\frac{g^2}{n},
+\]
+
+then Girko's circular law implies that the eigenvalues of \(W\) approximately
+fill the disk \(|z|\leq g\).
+
+\end{frame}
+
+\begin{frame}{Consequence: Local Stability Threshold}
+\small
+
+The linearized dynamics near \(x=0\) are determined by
+
+\[
+J(0)=\frac{1}{\tau}(-I+W).
+\]
+
+Thus each eigenvalue \(\lambda\) of \(W\) corresponds to a Jacobian eigenvalue
+
+\[
+\mu
+=
+\frac{\lambda-1}{\tau}.
+\]
+
+By Girko's circular law, the eigenvalues of \(W\) approximately fill the disk
+
+\[
+|\lambda|\leq g.
+\]
+
+Therefore, the Jacobian eigenvalues approximately fill the shifted and rescaled disk
+
+\[
+\left|\tau \mu + 1\right| \leq g.
+\]
+
+The rightmost point of this disk is
+
+\[
+\mu_{\max}
+\approx
+\frac{g-1}{\tau}.
+\]
+
+If \(g<1\), all Jacobian eigenvalues have negative real part, so the internal
+activity decays back to \(x=0\). If \(g>1\), some directions become locally
+unstable, so small perturbations can be amplified by recurrent feedback.
+
+\end{frame}
+
+\begin{frame}{Interpretation with Oja-Type Plasticity}
+
+For Adi to-do (Basically, with fast-slow dynamics this is approximately justified)
+
+\end{frame}
+
+\begin{frame}{Heuristic: Oja Learning Tracks Activity Correlations}
+\small
+
+For fixed activity \(x\), the Oja-type rule
+
+\[
+\dot W_{ij}
+=
+\eta x_i(x_j-x_iW_{ij})-\lambda W_{ij}
+\]
+
+has equilibrium
+
+\[
+W_{ij}^{\ast}
+=
+\frac{\eta x_i x_j}{\eta x_i^2+\lambda}.
+\]
+
+Equivalently,
+
+\[
+W^\ast = u x^T,
+\qquad
+u_i=
+\frac{\eta x_i}{\eta x_i^2+\lambda}.
+\]
+
+Thus, for constant activity, the learned matrix is rank at most one. This
+does not require the approximation
+\(\eta x_i^2 \ll \lambda\).
+
+\vspace{0.5em}
+
+For time-dependent driven activity, \(x(t)\), the analogous heuristic is
+
+\[
+W_{ij}^{\ast}
+\approx
+\frac{\eta \langle x_i(t)x_j(t)\rangle}
+{\eta \langle x_i(t)^2\rangle+\lambda}.
+\]
+
+Heuristically, Oja plasticity tends to align \(W(t)\) with the normalized correlation
+structure of the activity. Low-rank collapse is expected only if the driven
+activity is dominated by a small number of coherent modes. TODO: CLARIFY AND EXPAND UPON THIS HERE...PERHAPS SOME THEORY TO WHY SINE LEADS TO RANK COLLAPSE
+
+\end{frame}
+
+\begin{frame}{Driven Dynamics: Linearization}
+\small
+
+With time-dependent input, the dynamics are
+
+\[
+\tau \dot{x}
+=
+-x+\tanh(Wx+b(t)).
+\]
+
+Around a driven trajectory \(x^\ast(t)\), the perturbation dynamics satisfy
+
+\[
+\tau \dot{\delta x}
+=
+\left[-I+D(t)W\right]\delta x,
+\]
+
+where
+
+\[
+D(t)
+=
+\operatorname{diag}\left(
+\tanh'(Wx^\ast(t)+b(t))
+\right)
+=
+\operatorname{diag}\left(
+\operatorname{sech}^2(Wx^\ast(t)+b(t))
+\right).
+\]
+
+Thus the effective recurrent matrix is
+
+\[
+D(t)W.
+\]
+
+\end{frame}
+
+\begin{frame}{Driven Dynamics: Effective Random-Matrix Gain}
+\small
+
+If \(W_{ij}\) has variance \(g^2/n\), then TODO WHAT DOES CONDITIONALLY MEAN HERE conditionally on \(D(t)\),
+
+\[
+\mathrm{Var}\big((D(t)W)_{ij}\big)
+=
+\frac{g^2 d_i(t)^2}{n},
+\qquad
+d_i(t)=D_{ii}(t).
+\]
+
+This suggests the heuristic effective gain
+
+\[
+g_{\mathrm{eff}}(t)
+\approx
+g
+\sqrt{
+\frac{1}{n}\sum_{i=1}^n d_i(t)^2
+}.
+\]
+
+Girko's law gives \(g=1\) as the undriven fixed-weight reference threshold.
+In the driven nonlinear system, saturation changes the effective gain through
+\(D(t)\), so instability is better tracked by \(g_{\mathrm{eff}}(t)\) than by
+\(g\) alone.
+
+\end{frame}
+
+
+
+\section{Numerical Results}
+
+\begin{frame}{Oja Learning Does Not Self-Organize to the Edge of Chaos}
+\small
+
+A key motivation for studying Oja-type plasticity in recurrent networks is the
+conjecture that local learning rules might spontaneously drive the network
+toward a critical operating point near the edge of chaos, where $\rho(W) \approx 1$.
+
+\vspace{0.4em}
+
+To test this, we sweep initial spectral radii
+$g_0 \in \{0.3, 0.5, 0.7, 1.0, 1.5, 2.0, 2.5\}$, initialize
+$W_{ij} \sim \mathcal{N}(0, g_0^2/n)$, and run the full coupled system
+
+\[
+\tau \dot{x}_i = -x_i + \tanh\!\Bigl(\textstyle\sum_j W_{ij} x_j
+    + A\sin(\omega t + \phi_i)\Bigr),
+\qquad
+\dot{W}_{ij} = \eta x_i(x_j - x_i W_{ij}) - \lambda W_{ij},
+\]
+
+with $A=1$ (driven) and $A=0$ (autonomous) for $T=400$ time units.
+
+\vspace{0.4em}
+
+\begin{columns}[T]
+\begin{column}{0.57\textwidth}
+\includegraphics[width=\linewidth]{../oja_chaos/spectral_radius_trajectories.png}
+\end{column}
+\begin{column}{0.40\textwidth}
+\begin{block}{Finding}
+Under sinusoidal drive, $\rho(W) \to 45$ for every initial $g_0$.
+The drive erases all memory of the initial condition.
+The autonomous system ($A=0$) does exhibit a clean bifurcation at $g_0=1$, but
+the addition of periodic input \emph{unfolds} this bifurcation, removing
+the stable branch near $\rho(W)=1$.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Why the Drive Causes Runaway Growth}
+\small
+
+\textbf{Separation of timescales.} Activity relaxes on $\tau=1$; weights evolve
+on $1/\eta=100$; since $\eta\tau=0.01\ll 1$, $W$ is approximately constant on
+the fast (activity) timescale. By the averaging method we hold $W$ fixed and
+study the fast $x$-subsystem. \emph{Relaxes} means transients from initial
+conditions decay exponentially at rate $(1-\rho(DW))/\tau$, leaving only the
+driven response. For $g<1$, $\rho(DW)\leq\rho(W)<1$ (since $d_i\leq 1$), so
+the Poincar\'{e} map is a contraction and by the Banach fixed-point theorem
+there is a \emph{unique} globally attracting periodic orbit at frequency
+$\omega$; for $g>1$ the argument is heuristic. Averaging over one drive period
+$T_{\mathrm{avg}}=2\pi/\omega$ gives the correlation matrix felt by the slow
+$W$ dynamics:
+
+\[
+C(W) = \frac{1}{T_{\mathrm{avg}}}\int_0^{T_{\mathrm{avg}}} x(t;W)\,x(t;W)^T \, dt.
+\]
+
+The weight dynamics on the slow manifold reduce to
+
+\[
+\dot{W}_{ij} \approx
+\eta\bigl[C_{ij}(W) - C_{ii}(W)\, W_{ij}\bigr] - \lambda W_{ij}.
+\]
+
+Setting this to zero gives the fixed point
+
+\[
+W_{ij}^\ast = \frac{\eta\, C_{ij}(W^\ast)}{\eta\, C_{ii}(W^\ast) + \lambda}.
+\]
+
+\vspace{0.3em}
+
+Under sinusoidal drive at frequency $\omega$, every neuron responds at the same frequency,
+so that approximately $x_i(t) \approx r_i \sin(\omega t + \theta_i)$.
+The time-averaged correlation matrix is then
+
+\[
+C_{ij}(W) \approx \tfrac{1}{2} r_i r_j \cos(\theta_i - \theta_j),
+\]
+
+which has rank at most one. Consequently $W^\ast \approx \frac{\eta}{\lambda} r r^T$
+(up to diagonal factors), and the spectral radius satisfies
+$\rho(W^\ast) \approx \frac{\eta}{\lambda}\|r\|^2$. Since $\|r\|$ itself grows with
+$\rho(W)$, this is a self-reinforcing feedback loop with no finite
+fixed point under saturation-limited activity.
+
+\end{frame}
+
+\begin{frame}{Edge-of-Chaos Optimality for Signal Reconstruction}
+\small
+
+Although Oja learning does not maintain the network at the edge of chaos,
+the initial spectral radius $g$ still determines reconstruction quality.
+
+\vspace{0.3em}
+
+For each $g$, we run the driven Oja system for $T=80$ time units and fit a
+linear readout $c^\ast \in \mathbb{R}^n$ to reconstruct the target signal
+$y(t) = \sin(\omega t)$ from the activity history $X \in \mathbb{R}^{T/dt \times n}$:
+
+\[
+c^\ast = \arg\min_{c}\,\|Xc - y\|^2,
+\qquad
+R^2 = 1 - \frac{\|Xc^\ast - y\|^2}{\mathrm{Var}(y)}.
+\]
+
+The window $T=80$ is the natural measurement regime: transients have decayed
+(since $\tau=1$) but Oja has not yet fully saturated the network
+($\rho(W) \approx 10$--$20$).
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\begin{column}{0.53\textwidth}
+\includegraphics[width=\linewidth]{../oja_chaos/r2_vs_g.png}
+\end{column}
+\begin{column}{0.44\textwidth}
+\begin{block}{Finding}
+$R^2$ peaks at $g \approx 0.9$--$1.0$, reaching
+$R^2_{\max} \approx 0.81 \pm 0.06$, and falls to
+$R^2 \approx 0.22$ at $g = 3.0$.
+Networks initialized at the edge of chaos produce the richest activity during
+the learning transient, enabling more accurate reconstruction before Oja saturation
+degrades the signal.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Frozen Random Reservoir Outperforms Oja-Learned Weights}
+\small
+
+To assess the value of Oja learning directly, we compare to a frozen baseline.
+For each $g$, we run the same driven network with weights held fixed ($\eta = 0$)
+and fit a ridge-regression readout with regularization $\alpha = 10^{-3}$:
+
+\[
+c^\ast = (X^TX + \alpha I)^{-1}X^T y.
+\]
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\begin{column}{0.54\textwidth}
+\includegraphics[width=\linewidth]{../network_analysis/r2_baseline_vs_oja.png}
+\end{column}
+\begin{column}{0.43\textwidth}
+\vspace{0.2em}
+The frozen reservoir achieves $R^2 \approx 1.0$ for every $g$.
+This is not a trivial result: even a static random matrix, when driven by
+$A\sin(\omega t)$, projects the input into a high-dimensional space from which
+the target frequency can always be recovered by a linear readout.
+
+\vspace{0.4em}
+
+\begin{block}{Finding}
+Oja learning is counterproductive. It drives $\rho(W) \to 45$,
+saturating the $\tanh$ nonlinearity and destroying the activity diversity
+that makes reconstruction easy. The frozen network retains this diversity.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Input Structure Drives Rank Collapse: A Mechanistic Test}
+\small
+
+The slow-manifold analysis predicts that rank collapse is tied to the rank of
+$C(W)$, not to the learning rule per se. We test this by replacing the sinusoidal
+drive with three alternatives:
+
+\vspace{0.2em}
+
+\begin{itemize}
+\item \emph{Quasi-periodic:}
+      $A/\sqrt{3}\sum_{k=1}^3 \sin(\omega_k t + \phi_i)$,
+      with $\omega_1=1$, $\omega_2=\varphi$ (golden ratio), $\omega_3=\sqrt{2}$.
+\item \emph{White noise:} $\xi_i(t) \sim \mathcal{N}(0, A^2/2)$ independently each step.
+\item \emph{Zero drive:} $A=0$ (autonomous network).
+\end{itemize}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\begin{column}{0.56\textwidth}
+\includegraphics[width=\linewidth]{../signal_comparison/correlation_rank_by_drive.png}
+\end{column}
+\begin{column}{0.41\textwidth}
+\begin{block}{Finding}
+For $g < 1$ (stable regime), white noise keeps $\mathrm{rank}(\hat{C}) \approx n$
+and prevents rank collapse entirely: $\rho(W)\to 0$, $\mathrm{PR}(W)\approx 36$.
+Sinusoidal drive collapses $\mathrm{rank}(\hat{C})\to 1$ within $T\approx 50$,
+and $\rho(W)\to 43$ in all cases.
+
+For $g > 1.5$ (chaotic regime), even white noise causes collapse, because the
+dominant Lyapunov mode of the chaotic network creates its own rank-one correlation
+structure that Oja then amplifies.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Effective Gain Is Self-Regulated by Saturation}
+\small
+
+The heuristic $g_{\mathrm{eff}}(t)\approx(\|W(t)\|_F/\sqrt{n})\sqrt{\mathrm{mean}(d_i^2)}$
+was tested in two ways: tracking it during Oja learning, and scanning frozen-weight
+networks across $g$.
+
+\vspace{0.2em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\linewidth]{geff_static_scan.png}
+\end{column}
+\begin{column}{0.42\textwidth}
+
+\vspace{0.2em}
+
+During Oja learning with sinusoidal drive, $\rho(W)\to 43$ but every neuron
+saturates ($|h_i|\to\infty$), so $d_i=\mathrm{sech}^2(h_i)\to 0$ and
+$g_{\mathrm{eff}}\to 0$.
+The network is in a \emph{maximally saturated} fixed point, not in a chaotic
+state — the linearized effective dynamics are always stable despite the
+exploding nominal spectral radius.
+
+\vspace{0.4em}
+
+\begin{block}{Finding}
+During Oja learning, $g_{\mathrm{eff}}\to 0$ as the network saturates — the
+Oja fixed point is dynamically stable despite $\rho(W)\to 43$.
+
+As a separate baseline (frozen weights, $\eta=0$, sinusoidal drive), the
+static scan shows $g_{\mathrm{eff}}=1$ is first crossed at $g\approx 1.5$,
+not $g=1$: sinusoidal drive saturates neurons enough to shift the effective
+stability boundary by $\sim\!50\%$ relative to the Girko prediction.
+The heuristic tracks $\rho(D(t)W(t))$ within $5\%$ across all $g$.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Critical Slowing Down at the Phase Transition}
+\small
+
+Independent evidence for the $g = 1$ phase transition comes from measuring the
+relaxation time of the autonomous discrete map $h_{t+1} = W f(h_t)$.
+
+\vspace{0.3em}
+
+A small perturbation $\delta h(0)$ evolves as $\|\delta h(t)\| \sim \|\delta h(0)\| e^{\lambda_1 t}$
+in the linear regime, where $\lambda_1$ is the largest Lyapunov exponent. For $\lambda_1 < 0$
+the relaxation time is $\tau_{\mathrm{relax}} = -1/\lambda_1$; for $\lambda_1 > 0$ the
+perturbation grows and $\tau_{\mathrm{relax}}$ is undefined.
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\linewidth]{../network_analysis/critical_slowing_down.png}
+\end{column}
+\begin{column}{0.42\textwidth}
+
+\vspace{0.3em}
+\begin{tabular}{lrr}
+\hline
+$g$ & $\lambda_1$ & $\tau_{\mathrm{relax}}$ \\
+\hline
+$0.30$ & $-1.20$ & $0.8$ steps \\
+$0.70$ & $-0.35$ & $2.9$ steps \\
+$0.90$ & $-0.10$ & $10.8$ steps \\
+$1.00$ & $-0.005$ & $\sim\!350$ steps \\
+$2.00$ & $+0.10$ & (chaotic) \\
+\hline
+\end{tabular}
+
+\vspace{0.4em}
+
+\begin{block}{Finding}
+$\tau_{\mathrm{relax}}$ diverges as $g \to 1^-$, which is the defining signature of a
+continuous (second-order) phase transition. The network at $g=1$ has no preferred
+timescale for returning to equilibrium — small disturbances persist arbitrarily long.
+\end{block}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\section{Concluding Remarks}
+
+\begin{frame}{Summary}
+\small
+
+We have studied a recurrent network in which both activity and weights evolve
+simultaneously under Oja-type plasticity and sinusoidal drive. The main findings are:
+
+\vspace{0.3em}
+
+\begin{enumerate}
+\item Oja learning \emph{does not} self-organize the spectral radius toward
+      the edge of chaos. Under sinusoidal drive, $\rho(W) \to 45$ regardless
+      of the initial $g_0$, because the drive creates a persistent rank-one
+      correlation structure that Oja amplifies without bound.
+
+\item The initial spectral radius $g$ still determines signal reconstruction
+      quality: $R^2$ peaks near $g=1$, where network activity is richest during
+      the early learning transient.
+
+\item A frozen random reservoir with ridge regression outperforms
+      the Oja-learned network for all $g$, because Oja learning destroys
+      the activity diversity that makes reconstruction tractable.
+
+\item Rank collapse requires \emph{structured} periodic input in the stable regime
+      ($g < 1$): white noise drives do not collapse $\rho(W)$ or reduce the
+      participation ratio. In the chaotic regime ($g > 1.5$), collapse occurs
+      regardless of input structure due to the dominant Lyapunov mode.
+
+\item Critical slowing down at $g=1$ — $\tau_{\mathrm{relax}} \to \infty$ —
+      provides a physically observable signature of the phase transition that
+      is independent of the Lyapunov exponent sign.
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Open Questions}
+\small
+
+Several questions remain for future work.
+
+\vspace{0.4em}
+
+The fixed-point analysis shows that $W^\ast \approx \frac{\eta}{\lambda}C(W^\ast)$
+on the slow manifold. A full stability analysis of this self-consistent equation
+would clarify whether the $\rho(W)\to\infty$ trajectory is the only attractor
+under sinusoidal drive, or whether there exist bounded fixed points at large $n$.
+
+\vspace{0.4em}
+
+The quasi-periodic drive collapses $\rho(W)$ as strongly as the single sinusoid,
+which suggests the number of active modes in $C$ is less important than whether
+any structured periodic components are present. A precise criterion —
+characterizing exactly which input power spectra lead to rank collapse — would
+sharpen the connection to the seizure hypothesis.
+
+\vspace{0.4em}
+
+\begin{block}{Seizure connection}
+The key experimental prediction is: rhythmic, periodic input is necessary
+for Oja-driven rank collapse in stable networks, while random input is
+not sufficient. This suggests that pathological periodicity — rather than
+high firing rates alone — may be the mechanistically important feature
+of seizure-like activity driving network-level dimensionality collapse.
+\end{block}
+
+\end{frame}
+
+\end{document}

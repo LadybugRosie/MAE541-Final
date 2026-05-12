@@ -1,0 +1,37 @@
+% Minimal loadslides.tex for Lars Spreng beamer template
+% Provides the packages and theme settings expected by revised-slides.tex
+
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage{microtype}
+\usepackage{lmodern}
+
+% Beamer theme
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Princeton-ish color scheme
+\definecolor{PrincetonOrange}{RGB}{245, 128, 37}
+\definecolor{DarkBlue}{RGB}{25, 50, 100}
+
+\setbeamercolor{palette primary}{bg=DarkBlue, fg=white}
+\setbeamercolor{palette secondary}{bg=DarkBlue!80, fg=white}
+\setbeamercolor{palette tertiary}{bg=DarkBlue!60, fg=white}
+\setbeamercolor{structure}{fg=DarkBlue}
+\setbeamercolor{block title}{bg=DarkBlue!15, fg=DarkBlue}
+\setbeamercolor{block body}{bg=DarkBlue!5}
+\setbeamercolor{alerted text}{fg=PrincetonOrange}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Slightly larger fonts in blocks
+\setbeamerfont{block title}{size=\small}
+\setbeamerfont{block body}{size=\small}
+
+% graphicspath so figures resolve from papers/ directory
+\graphicspath{{./}{../}{../oja_chaos/}{../network_analysis/}{../signal_comparison/}{../chaos_stability/}{../geff_analysis/}}

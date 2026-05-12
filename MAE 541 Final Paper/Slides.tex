@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{parskip}
+\usepackage{amsmath}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{verbatim}
+
+\title{MAE 541 Final Project Proposal \\[0.5em] \Large Bifurcation and Symbolic Dynamics in Recurrent Neural Systems with Oja-Type Plasticity}
+\author{Aditya Biswas, David Hovey}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Overview}
+
+We will study a small recurrent neural network in which both neuronal activations and synaptic weights evolve in time. Our central question will be:
+
+\begin{center}
+\textit{How does local learning reshape the dynamical structure of a neural system, and how can this be captured through symbolic dynamics?}
+\end{center}
+
+Rather than treating learning as an external training process, we will model it as an internal dynamical mechanism that co-evolves with neural activity. This will produce a coupled fast--slow system in which neural activations evolve quickly while synaptic weights evolve slowly, causing the phase portrait itself to change over time.
+
+In addition to classical bifurcation and stability analysis, we will aim to construct a coarse-grained symbolic description of system behavior using recurrence-based methods. This will allow us to interpret metastable regimes, transitions between learned states, and how learning modifies the system's dynamical repertoire.
+
+\section*{Model Development}
+
+We will begin with a standard recurrent neural network model:
+
+\begin{equation}
+\tau \dot{x}_i + x_i = f\!\left(\sum_j W_{ij} x_j + b_i\right)
+\end{equation}
+
+where $x_i(t)\in(-1,1)$ is neuronal activity, $W_{ij}$ is the synaptic weight matrix, $b_i$ is an external bias, and $f$ is a nonlinear activation function (e.g., $\tanh$).
+
+We will introduce learning by allowing $W$ to evolve in time. Our model of learning is derived from two main theories of learning and forgetting: Hebbian and Oja-type learning.
+
+\subsection*{Hebbian learning with forgetting}
+\begin{equation}
+\dot{W}_{ij} + \lambda W_{ij} = \eta x_i x_j
+\end{equation}
+
+This will capture correlation-based learning with a finite memory timescale.
+
+\subsection*{Oja-type learning}
+\begin{equation}
+\dot{W}_{ij} = \eta x_i (x_j - x_i W_{ij})
+\end{equation}
+
+This will introduce bounded weight growth, competition between synapses, and dimensionality reduction.
+
+\subsection*{Combined model}
+
+We will study the hybrid learning system:
+\begin{equation}
+\dot{W}_{ij} + \lambda W_{ij} = \eta x_i (x_j - x_i W_{ij})
+\end{equation}
+
+yielding the coupled system:
+\begin{align}
+\tau \dot{x}_i &= -x_i + f\!\left(\sum_j W_{ij} x_j + b_i\right) \\
+\dot{W}_{ij} + \lambda W_{ij} &= \eta x_i (x_j - x_i W_{ij})
+\end{align}
+
+This system will contain three timescales:
+\begin{itemize}
+\item neural dynamics: $\tau$
+\item learning: $1/\eta$
+\item forgetting: $1/\lambda$
+\end{itemize}
+
+\section*{Significance}
+While Oja-type learning is well studied in feedforward settings, we will study its role within a nonlinear recurrent system where learning and dynamics are fully coupled. Our goal will be to link local plasticity rules, bifurcation structure, and symbolic dynamics into a unified framework.
+
+\section*{Approach}
+Our approach will combine analytical and computational methods to study the coupled evolution of neural activity and synaptic weights. We will proceed in a staged manner, moving from continuous dynamics to coarse-grained symbolic representations.
+
+%\subsection*{Fast--slow decomposition}
+We will exploit the separation of timescales:
+\begin{equation}
+    \tau \ll \frac{1}{\eta} \ll \frac{1}{\lambda}
+\end{equation}
+\\
+to decompose the system into fast neural dynamics and slow weight evolution. 
+
+\subsection*{Trajectory and Equilibrium Analysis}
+First, we plan to analyze the fast subsystem by treating $W$ as quasi-static and characterizing its fixed points and attractors. Then, we will study how the slow evolution of $W$ induces gradual deformation of these attractors. This will allow us to interpret learning as a trajectory through a family of dynamical systems parameterized by $W$.
+
+For fixed $W$, we will compute equilibria of the neural dynamics and determine their stability. We will then track how these equilibria change as parameters vary, focusing on: bias $b$, learning rate $\eta$, forgetting rate $\lambda$. Using both analytical linearization and numerical continuation methods, we will identify bifurcations, including symmetry-breaking transitions and the emergence or disappearance of attractors. This will provide a baseline description of the system's continuous phase-space structure.
+
+%\subsection*{Trajectory generation and simulation}
+Coupling our theoretical analysis with numerical simulation, we will simulate the full coupled system for a range of initial conditions and parameter values. These simulations will produce trajectories in the joint $(x, W)$ state space, capturing both fast transient dynamics and slow learning-induced evolution. We will explicitly compare trajectories before and after learning, regimes with weak vs. strong learning, symmetric vs. perturbed weight structures.
+
+\subsection*{Symbolic Dynamics}
+To obtain a coarse-grained description, we will construct symbolic representations of trajectories using recurrence-based partitioning. Specifically, we will identify recurrence domains by clustering regions of state space with similar dynamical behavior, assign a discrete symbol to each domain, encode trajectories as sequences of symbols, construct transition graphs between symbolic states. This procedure will transform continuous trajectories into discrete dynamical objects that capture metastability and switching behavior.
+
+%\subsection*{Linking symbolic structure to underlying dynamics}
+We will then analyze how symbolic representations relate to the underlying continuous system by comparing symbolic states to fixed points or attractor basins, measuring dwell times within recurrence domains, identifying transitions associated with bifurcations or slow drift in $W$. A key goal will be to determine whether changes in symbolic structure (e.g., new states or transitions) correspond to qualitative changes in the phase portrait.
+
+%\subsection*{Evolution of symbolic dynamics under learning}
+Unlike classical symbolic dynamics, the partition itself will evolve as learning progresses. We will therefore track how the set of symbolic states changes over time and the transition probabilities evolve, leading to the appearance, merging, or annihilation of metastable regimes. This will provide a dynamical, time-dependent symbolic description of learning.
+
+\begin{comment}
+\subsection*{Symmetry and perturbation analysis}
+
+We will introduce structured perturbations:
+\begin{equation}
+W = S + \epsilon A
+\end{equation}
+where $S$ is symmetric and $A$ is antisymmetric.
+
+We will then study how symmetry breaking affects:
+\begin{itemize}
+\item bifurcation structure,
+\item attractor geometry,
+\item symbolic transition graphs.
+\end{itemize}
+
+This will allow us to probe the robustness of observed behaviors and the emergence of non-gradient dynamics.
+\end{comment}
+
+\subsection*{Optional extensions}
+If time permits, we will extend the analysis to time-dependent inputs and biases $b_i(t)$, periodic orbits and potential chaotic regimes, and comparisons between smooth ($\tanh$) and piecewise-linear (ReLU) nonlinearities.
+
+\section*{Connection to Prior Work}
+Prior work shows that recurrence-based methods can identify metastable regions of state space and represent complex dynamics symbolically. Additionally, symbolic dynamics has been used to study temporal organization of brain states, emphasizing dwell times and transition structures.
+
+We will extend these ideas by applying them to a learning dynamical system, where the symbolic structure itself evolves over time.
+\end{document}

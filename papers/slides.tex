@@ -312,7 +312,72 @@ Oja-learned networks achieve $R^2 = 0.62$--$0.80$.
 \end{columns}
 \end{frame}
 
-\begin{frame}{Result 4: Critical Slowing Down at the Phase Transition}
+\begin{frame}{Result 4: Input Structure Drives Collapse — But Only Below the Phase Transition}
+
+\begin{columns}[T]
+\begin{column}{0.54\textwidth}
+\includegraphics[width=\linewidth]{../signal_comparison/rho_vs_time_by_drive.png}
+\end{column}
+\begin{column}{0.44\textwidth}
+\textbf{Experiment:} Compare Oja learning under four drive types at $g \in \{0.3, 1.0, 1.5, 2.0\}$.
+
+\vspace{0.4em}
+\begin{block}{Results at $T=300$}
+\footnotesize
+\begin{tabular}{lll}
+\toprule
+Drive & $\rho_{\rm final}$ ($g{=}1.0$) & PR ($g{=}1.0$) \\
+\midrule
+Sinusoidal & $42.6$ & $1.1$ \\
+Quasi-periodic & $42.7$ & $1.1$ \\
+\textbf{White noise} & $\mathbf{0.79}$ & $\mathbf{35.8}$ \\
+Zero (auto.) & $0.75$ & $35.8$ \\
+\bottomrule
+\end{tabular}
+\end{block}
+
+\vspace{0.3em}
+\begin{alertblock}{Surprising: two collapse pathways}
+\textbf{Stable networks ($g < 1$):} only structured input collapses $W$.
+White noise $\Rightarrow$ no collapse; $\rho \to 0$.\\[0.3em]
+\textbf{Chaotic networks ($g > 1.5$):} collapse happens for \textit{all} drives — even white noise!
+The dominant Lyapunov mode creates its own rank-1 correlation.
+\end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Result 4b: The Correlation Rank Mechanism}
+
+\begin{columns}[T]
+\begin{column}{0.60\textwidth}
+\includegraphics[width=\linewidth]{../signal_comparison/correlation_rank_by_drive.png}
+\end{column}
+\begin{column}{0.38\textwidth}
+\textbf{Direct mechanistic test:}  rank of the rolling-window correlation matrix
+$\hat{C}(t) = \tfrac{1}{T_w}\sum_{s} x(s)\,x(s)^T$
+
+\vspace{0.4em}
+\begin{exampleblock}{Sinusoidal}
+$\hat{C} \approx \tfrac{A^2}{2} r r^T$ (rank-1 within $T \approx 50$).\\
+$W^* \approx \tfrac{\eta}{\lambda} r r^T$ — the self-reinforcing loop closes.
+\end{exampleblock}
+
+\vspace{0.3em}
+\begin{exampleblock}{White noise ($g<1$)}
+$\hat{C} \approx \sigma^2 I$ (full rank, stays $\approx n$).\\
+$W^* \approx \tfrac{\eta\sigma^2}{\lambda} I$ — no dominant mode, no collapse.
+\end{exampleblock}
+
+\vspace{0.3em}
+\small
+\textbf{Seizure implication:} Pathological \textit{rhythmic} oscillations (seizure onset) selectively create the rank-1 correlation that drives dimensionality collapse.
+Random neural noise alone is not sufficient — the \textbf{periodicity} is the dangerous ingredient.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Result 5: Critical Slowing Down at the Phase Transition}
 
 \begin{columns}[T]
 \begin{column}{0.56\textwidth}
@@ -345,7 +410,7 @@ Right panel: $\delta(t)$ decays for $g<1$, grows for $g>1$.
 \end{columns}
 \end{frame}
 
-\begin{frame}{Result 5: Eigenvalue Spectrum Collapses During Oja Learning}
+\begin{frame}{Result 6: Eigenvalue Spectrum Collapses During Oja Learning}
 
 \begin{center}
 \includegraphics[width=0.90\linewidth]{eigenvalue_evolution.png}
@@ -358,7 +423,7 @@ Each panel shows eigenvalues of $W$ in the complex plane at snapshot times $t \i
 \textbf{Observation:} Initial Girko disk (uniform fill, radius $\approx g$) deforms as $\rho(W) \to 45$. By $t=400$, the spectrum is dominated by a small number of large-magnitude outlier eigenvalues — consistent with rank-1 / low-rank $W^* = \frac{\eta}{\lambda}xx^T$ prediction.
 \end{frame}
 
-\begin{frame}{Result 6: $W$ Structure and Computation — Correlation Analysis}
+\begin{frame}{Result 7: $W$ Structure and Computation — Correlation Analysis}
 
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}

@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{hhline}
+
+\title{MAE 541 Final Project Proposal \\[0.5em] \Large Bifurcation Analysis of Simple Neural Nets with Learning}
+\author{Aditya Biswas, David Hovey} 
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+
+\maketitle
+\pagebreak
+
+\section*{Overview}
+We will study a graph of neurons that have plastic weights to account for learning to FIGURE SOMETHING OUT. We still need a research question. Perhpas we could look at decision-making in a small system as a bifurcation. Or how pattern completion and pattern storage is encoded in theses networks through local or batch learning.
+
+\section*{Model Development}
+Let us consider the following standard set of ODEs governing a simple neural net where each neuron receives an input that is a nonlinear function of the average of all inputs from all other neurons and the bias. The weights are fixed.
+
+% weights st. activation of presynaptic neurons naturally impacts postsynaptic neurons more.
+
+\begin{equation}
+    \tau \dot{x}_i + x_i = f\bigg(\sum_j W_{ij} x_j + b_i\bigg)
+\end{equation}
+\\
+where $\tau_i$ is a time constant, $x_i(t)\in[-1,1]$ is the activation level of neuron $i$, $b_i$ is a bias/ external driver, $\mathbf{W} = [W_{ij}]$ is the weight matrix, and $f$ is the nonlinearity. We would choose either $f=\tanh$ or $f=\text{ReLU}=\max(\cdot,0)$ depending on if we wanted smooth dynamics and bifurcation or have a natural partition of the phase space for symbolic dynamics.
+\vspace{0.25cm}
+\\
+\hspace{0.5cm} Next, we improve our model to account for learning by having the weight matrix $\mathbf{W}$ be a function of time. The two main options for learning are Hebb's learning rule and Oja's learning rule. In Hebbian learning, "neurons that fire together wire together" and accounting for decay/ forgetting, we have that
+
+\begin{equation}
+    \dot{W}_{ij} +\lambda W_{ij} = \eta x_i x_j
+\end{equation}
+\\
+Where $\lambda$ is a forgetting parameter and $\eta$ represents the learning rate. Hebb's rule essentially leads to networks that track the current correlation structure of neuronal activity (covariance), leading to finite-timescale dynamical memory. However, there is no way for Hebbian learning to reduce dimensionality of the system. To solve this issue, we can use Oja's rule, which adds "neuron competition."
+
+\begin{equation}
+    \dot{W}_{ij} = \eta x_i (x_j - x_iW_{ij})
+\end{equation}
+\\
+Oja learning creates a network that uses principal component analysis to reduce the dimensionality of the neuronal activation manifold. Oja learning does not account for generic long-timescale forgetting, so we can combine the two models to get a hybrid model that accounts for both the forgetting and dimensionality reduction seen in biological neural nets:
+
+\begin{equation}
+    \dot{W}_{ij} +\lambda W_{ij} = \eta x_i (x_j - x_iW_{ij})
+\end{equation}
+\\
+Or, adding a term to promote different neurons learning different modes,
+\begin{equation}
+    \dot{W} +\lambda W = \eta \bigg(x x^T - \text{Diag}(x^2)W - Wxx^T\bigg)
+\end{equation}
+\\
+With $\text{Diag}(x^2) = D(x_1^2,x_2^2,...)$. However, loss of locality makes equation $(5)$ undesirable to use. We note the three different timescales present in the formulation, $\tau$, $\frac{1}{\eta}$, and $\frac{1}{\lambda}$, representing neuronal dynamics speed, learning speed, and forgetting speed, respectively.
+
+\section*{Approach}
+We plan to focus primarily on equilibrium, stability, and bifurcation analysis of the system of equations below:
+
+\begin{equation}
+    \tau \dot{x}_i + x_i = f\bigg(\sum_j W_{ij} x_j + b_i\bigg)
+\end{equation}
+\begin{equation}
+    \dot{W}_{ij} +\lambda W_{ij} = \eta x_i (x_j - x_iW_{ij})
+\end{equation}
+\\
+To analyze this complicated system of ODEs, we plan to use separation of timescales $\tau \ll \frac{1}{\eta} \ll \frac{1}{\lambda}$ (also there is a hidden state-dependent timescale $\frac{1}{\eta x_i^2}$)to help find quasi-equilibrium and quasi-stability conditions. This will require us to use geometric singular perturbation theory and averaging methods. For our initial conditions, we will consider the random initial weights case and the perturbation from symmetric weights case. For random/ symmetric initial weights, neurons are identical in the expectation and the system is approximately symmetric under permutations of neurons. This symmetry is broken as small perturbations from such equilibrium lead to asymmetric Hebbian-like growth. Next, for perturbation from symmetry, let the initial weight matrix be written
+\begin{equation}
+    W = S + \epsilon A
+\end{equation}
+where $S$ is the symmetric part and $A$ is an (antisymmetric?) perturbation of order $\epsilon$. Notice only symmetric part gives a Hopfield network, which has a Lyapunov energy functional that implies asymptotic convergence to a global minimum. Thus $A$ is necessary for nontrivial dynamics (in certain cases, it may move trajectories along level sets of the unperturbed system since it doesn't impact energy functional?).
+\vspace{0.25cm}
+\\
+\hspace{0.5cm} If there is time, we hope to study forced oscillating inputs $b_i(t)$ (only to first layer of neurons) and how this impacts chaotic dynamics or leads to periodic orbit formation (only way without recurrent neural networks). Note we have an autonomous system when $b$ is constant and a non-autonomous system when it is forcing. We may also want to study attractor formation, probably using bifurcation theory.
+
+\section*{Further Research}
+Further improvements including improving our analysis of chaos using symbolic dynamics (if we use the rectification nonlinearity function for $f$), Melnikov functions, and Lyapunov exponents.
+\end{document}
