@@ -1,0 +1,63 @@
+\relax 
+\providecommand*\new@tpo@label[2]{}
+\providecommand \babel@aux [2]{\global \let \babel@toc \@gobbletwo }
+\@nameuse{bbl@beforestart}
+\citation{langton1990computation}
+\citation{sompolinsky1988chaos}
+\babel@aux{english}{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Motivation}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Background}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Fixed-Weight Recurrent Networks}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Learning in Recurrent Neural Networks}{3}{}\protected@file@percent }
+\newlabel{3.3}{{3.3}{3}{}{equation.3.3}{}}
+\citation{oja1982simplified}
+\newlabel{3.4}{{3.4}{4}{}{equation.3.4}{}}
+\newlabel{3.4}{{3.5}{4}{}{equation.3.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Girko's Circular Law}{4}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Eigenvalues of a random weight matrix $W \in \math@bb  {R}^{n \times n}$, $W_{ij} \sim \mathcal  {N}(0, \frac  {g}{n^2})$, $n=900$ uniformly distributed on the disk \(D_g\) of radius \(g\) in accordance with Girko's circular law.}}{5}{}\protected@file@percent }
+\newlabel{fig:girko}{{3.1}{5}{}{figure.3.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Theoretical Analysis}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Analysis For Constant Weight Matrix}{5}{}\protected@file@percent }
+\newlabel{4.1}{{4.1}{5}{}{equation.4.1}{}}
+\newlabel{4.2}{{4.2}{5}{}{equation.4.2}{}}
+\citation{guckenheimer1983nonlinear}
+\newlabel{4.7}{{4.7}{6}{}{equation.4.7}{}}
+\newlabel{4.8}{{4.8}{6}{}{equation.4.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Extension For Random Weight Matrices}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Averaging Analysis and Slow-manifold dynamics}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Effective Random-Matrix Gain}{10}{}\protected@file@percent }
+\newlabel{eq:geff}{{4.31}{10}{}{equation.4.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Numerical Simulations}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Oja Learning Does Not Self-Organize to the Edge of Chaos}{11}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Spectral radius $\rho (W(t))$ over time for all initial conditions $g_0$ under sinusoidal drive (left) and autonomous dynamics (right).}}{11}{}\protected@file@percent }
+\newlabel{fig:rho_traj}{{5.1}{11}{}{figure.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Edge-of-Chaos Optimality for Signal Reconstruction}{12}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Signal reconstruction $R^2$ as a function of initial spectral radius $g_0$.}}{12}{}\protected@file@percent }
+\newlabel{fig:r2_vs_g}{{5.2}{12}{}{figure.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Frozen Random Reservoir Outperforms Oja-Learned Weights}{12}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Comparison of signal reconstruction $R^2$ for Oja-learned weights (orange) versus a frozen random reservoir with ridge regression (blue).}}{13}{}\protected@file@percent }
+\newlabel{fig:r2_comparison}{{5.3}{13}{}{figure.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Input Structure Drives Rank Collapse}{13}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Rank of the rolling activity correlation matrix $\hat  {C}$ over time for all four drive types at $g = 1.0$, using a 2000-step (100 time unit) rolling window. Sinusoidal (A) and quasi-periodic (B) drives collapse the rank to 1; white noise (C) preserves the full rank $n = 50$; the autonomous network (D) silences to rank~0.}}{14}{}\protected@file@percent }
+\newlabel{fig:rank_collapse}{{5.4}{14}{}{figure.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Effective Gain Is Self-Regulated by Saturation}{15}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Time-averaged effective gain $g_{\mathrm  {eff}}$ (blue) and directly calculated spectral radius $\rho (D(t)W)$ (orange) versus nominal $g$ for frozen weights under sinusoidal drive. The dotted diagonal shows the no-saturation baseline $g_{\mathrm  {eff}} = g$.}}{15}{}\protected@file@percent }
+\newlabel{fig:geff_scan}{{5.5}{15}{}{figure.5.5}{}}
+\citation{guckenheimer1983nonlinear}
+\citation{sompolinsky1988chaos}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Critical Slowing Down at the Phase Transition}{16}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Left: relaxation time $\tau _{\mathrm  {relax}} = -1/\lambda _1$ versus $g$ for the autonomous discrete map; $\tau _{\mathrm  {relax}}$ diverges as $g \to 1^-$. Right: predicted perturbation growth $\|\delta h(t)\| = \varepsilon \,e^{\lambda _1 t}$ using the power-iteration LLE values, illustrating the stable ($g = 0.5$), critical ($g = 1.0$), and chaotic ($g = 2.0$) regimes.}}{16}{}\protected@file@percent }
+\newlabel{fig:csd}{{5.6}{16}{}{figure.5.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Largest Lyapunov exponent and relaxation time for selected $g$ values ($n = 50$, autonomous discrete map, mean over 5 seeds).}}{16}{}\protected@file@percent }
+\newlabel{tab:lle}{{5.1}{16}{}{table.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusions}{17}{}\protected@file@percent }
+\citation{*}
+\bibstyle{plain}
+\bibdata{references}
+\bibcite{funamizu2025modeling}{1}
+\bibcite{guckenheimer1983nonlinear}{2}
+\bibcite{langton1990computation}{3}
+\bibcite{oja1982simplified}{4}
+\bibcite{sompolinsky1988chaos}{5}
+\gdef \@abspage@last{18}

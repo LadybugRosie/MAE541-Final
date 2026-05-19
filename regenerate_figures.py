@@ -243,7 +243,7 @@ def fig_correlation_rank():
 
     fig.suptitle(
         r'Rank of Activity Correlation Matrix $\langle xx^T \rangle$ by Drive Type  ($g = 1.0$)'
-        '\nRolling 200-step window; rank collapse to 1 indicates rank-deficient correlations',
+        '\nRolling 2000-step window (100 time units); rank reflects true signal dimensionality',
         fontsize=12, fontweight='bold', y=1.02,
     )
     fig.tight_layout()
@@ -282,8 +282,7 @@ def fig_geff_scan():
     ax.set_xlabel(r'Nominal spectral radius $g$')
     ax.set_ylabel('Effective gain')
     ax.set_title(
-        'Effective Gain Under Sinusoidal Drive: Static Scan (Frozen Weights)\n'
-        r'$g_\mathrm{eff} = 1$ crossing shifts from $g = 1$ to $g \approx 1.5$ due to neural saturation',
+        'Effective Gain Under Sinusoidal Drive: Static Scan (Frozen Weights)',
         pad=8, fontsize=11,
     )
     ax.legend(fontsize=9, loc='upper left')

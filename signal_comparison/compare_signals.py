@@ -232,7 +232,7 @@ def run_comparison(
                 # Long trace (T=300)
                 recs, _, _, _ = simulate_with_drive(
                     W0, params, drive_fn,
-                    T=T, dt=dt, sample_every=20, corr_window=200, seed=seed,
+                    T=T, dt=dt, sample_every=20, corr_window=2000, seed=seed,
                 )
                 for r in recs:
                     trace_records.append(dict(drive=drive_kind, g=g, seed=seed, **r))

@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{funamizu2025modeling}
+Akihiro Funamizu and Ryo Karakida.
+\newblock Modeling natural neural networks of decision making with artificial
+  neural networks.
+\newblock {\em Neuroscience Research}, 220:104961, 2025.
+
+\bibitem{guckenheimer1983nonlinear}
+John Guckenheimer and Philip Holmes.
+\newblock {\em Nonlinear Oscillations, Dynamical Systems, and Bifurcations of
+  Vector Fields}, volume~42 of {\em Applied Mathematical Sciences}.
+\newblock Springer, New York, 1983.
+
+\bibitem{langton1990computation}
+Chris~G. Langton.
+\newblock Computation at the edge of chaos: Phase transitions and emergent
+  computation.
+\newblock {\em Physica D: Nonlinear Phenomena}, 42(1--3):12--37, 1990.
+
+\bibitem{oja1982simplified}
+Erkki Oja.
+\newblock A simplified neuron model as a principal component analyzer.
+\newblock {\em Journal of Mathematical Biology}, 15(3):267--273, 1982.
+
+\bibitem{sompolinsky1988chaos}
+H.~Sompolinsky, A.~Crisanti, and H.~J. Sommers.
+\newblock Chaos in random neural networks.
+\newblock {\em Physical Review Letters}, 61(3):259--262, 1988.
+
+\end{thebibliography}

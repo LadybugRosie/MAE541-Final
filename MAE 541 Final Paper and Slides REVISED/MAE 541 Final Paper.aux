@@ -1,0 +1,48 @@
+\relax 
+\providecommand*\new@tpo@label[2]{}
+\providecommand \babel@aux [2]{\global \let \babel@toc \@gobbletwo }
+\@nameuse{bbl@beforestart}
+\babel@aux{english}{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Motivation}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Background}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Fixed-Weight Recurrent Networks}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Grossberg \(S\)-\(\Sigma \) Equivalence}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Learning in Recurrent Neural Networks}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Girko's Circular Law}{1}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Eigenvalues of a random weight matrix $W \in \math@bb  {R}^{n \times n}$, $W_{ij} \sim \mathcal  {N}(0, \frac  {g}{n^2})$, $n=900$ uniformly distributed on the disk \(D_g\) of radius \(g\) in accordance with Girko's circular law.}}{2}{}\protected@file@percent }
+\newlabel{fig:girko}{{3.1}{2}{}{figure.3.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Theoretical Analysis}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Fixed-Point Analysis TODO: FIX TITLE}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Stability and Existence Arguments}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Averaging Analysis and Slow-manifold dynamics}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Effective Random-Matrix Gain}{5}{}\protected@file@percent }
+\newlabel{eq:geff}{{4.2}{5}{}{equation.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Numerical Simulations}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Oja Learning Does Not Self-Organize to the Edge of Chaos}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Spectral radius $\rho (W(t))$ over time for all initial conditions $g_0$ under sinusoidal drive (left) and autonomous dynamics (right).}}{6}{}\protected@file@percent }
+\newlabel{fig:rho_traj}{{5.1}{6}{}{figure.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Edge-of-Chaos Optimality for Signal Reconstruction}{7}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Signal reconstruction $R^2$ as a function of initial spectral radius $g_0$.}}{7}{}\protected@file@percent }
+\newlabel{fig:r2_vs_g}{{5.2}{7}{}{figure.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Frozen Random Reservoir Outperforms Oja-Learned Weights}{8}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Comparison of signal reconstruction $R^2$ for Oja-learned weights (orange) versus a frozen random reservoir with ridge regression (blue).}}{8}{}\protected@file@percent }
+\newlabel{fig:r2_comparison}{{5.3}{8}{}{figure.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Input Structure Drives Rank Collapse}{9}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Rank of the rolling activity correlation matrix $\hat  {C}$ over time for all four drive types at $g = 1.0$, using a 2000-step (100 time unit) rolling window. Sinusoidal (A) and quasi-periodic (B) drives collapse the rank to 1; white noise (C) preserves the full rank $n = 50$; the autonomous network (D) silences to rank~0.}}{9}{}\protected@file@percent }
+\newlabel{fig:rank_collapse}{{5.4}{9}{}{figure.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Effective Gain Is Self-Regulated by Saturation}{10}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Time-averaged effective gain $g_{\mathrm  {eff}}$ (blue) and directly calculated spectral radius $\rho (D(t)W)$ (orange) versus nominal $g$ for frozen weights under sinusoidal drive. The dotted diagonal shows the no-saturation baseline $g_{\mathrm  {eff}} = g$.}}{10}{}\protected@file@percent }
+\newlabel{fig:geff_scan}{{5.5}{10}{}{figure.5.5}{}}
+\citation{guckenheimer1983nonlinear}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Critical Slowing Down at the Phase Transition}{11}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Left: relaxation time $\tau _{\mathrm  {relax}} = -1/\lambda _1$ versus $g$ for the autonomous discrete map; $\tau _{\mathrm  {relax}}$ diverges as $g \to 1^-$. Right: predicted perturbation growth $\|\delta h(t)\| = \varepsilon \,e^{\lambda _1 t}$ using the power-iteration LLE values, illustrating the stable ($g = 0.5$), critical ($g = 1.0$), and chaotic ($g = 2.0$) regimes.}}{11}{}\protected@file@percent }
+\newlabel{fig:csd}{{5.6}{11}{}{figure.5.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Largest Lyapunov exponent and relaxation time for selected $g$ values ($n = 50$, autonomous discrete map, mean over 5 seeds).}}{11}{}\protected@file@percent }
+\newlabel{tab:lle}{{5.1}{11}{}{table.5.1}{}}
+\citation{sompolinsky1988chaos}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusions}{12}{}\protected@file@percent }
+\citation{*}
+\bibstyle{plain}
+\bibdata{references}
+\gdef \@abspage@last{12}
